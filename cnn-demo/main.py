@@ -43,4 +43,4 @@ if __name__ == '__main__':
 
     # test
     test_loss, test_acc = model.evaluate(test_images, test_labels)
-    print(test_acc)
+    print(test_acc) 
