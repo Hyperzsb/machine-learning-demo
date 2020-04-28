@@ -23,10 +23,10 @@ train_dataset_feature = preprocessing.scale(train_dataset_feature)
 # Extract the label column
 train_dataset_label = np.array(original_dataset['label'])
 # Divide the dataset to train dataset and test dataset
-train_feature, test_feature, train_target, test_target = train_test_split(train_dataset_feature, train_dataset_label,
-                                                                          test_size=0.3, random_state=0)
+train_feature, test_feature, train_label, test_label = train_test_split(train_dataset_feature, train_dataset_label,
+                                                                        test_size=0.3, random_state=0)
 
-# Create and train a random forest classifier or load existed classifier
+# Create and train a Random Forest classifier or load existed classifier
 model_saved_path = 'saved-model/random-forest-classifier.m'
 if os.path.exists(model_saved_path):
     print('Loading existed model')
@@ -35,10 +35,10 @@ if os.path.exists(model_saved_path):
 else:
     print('Training new model')
     clf = RandomForestClassifier()
-    clf.fit(train_feature, train_target)
+    clf.fit(train_feature, train_label)
     joblib.dump(clf, model_saved_path)
     print('Training complete')
 
 # Predict and test accuracy
 predict_results = clf.predict(test_feature)
-print('Accuracy: ', accuracy_score(predict_results, test_target))
+print('Accuracy: ', accuracy_score(predict_results, test_label))

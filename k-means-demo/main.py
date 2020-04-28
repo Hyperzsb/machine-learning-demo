@@ -23,8 +23,8 @@ train_dataset_feature = preprocessing.scale(train_dataset_feature)
 # Extract the label column
 train_dataset_label = np.array(original_dataset['label'])
 # Divide the dataset to train dataset and test dataset
-train_feature, test_feature, train_target, test_target = train_test_split(train_dataset_feature, train_dataset_label,
-                                                                          test_size=0.3, random_state=0)
+train_feature, test_feature, train_label, test_label = train_test_split(train_dataset_feature, train_dataset_label,
+                                                                        test_size=0.3, random_state=0)
 
 # Create and train a K-Means cluster with k = 2 or load existed cluster
 model_saved_path = 'saved-model/k-means-cluster.m'
@@ -41,5 +41,5 @@ else:
 
 # Predict and test accuracy
 prediction_res = kmeans.predict(test_feature)
-train_dataset_accuracy = accuracy_score(prediction_res, test_target)
+train_dataset_accuracy = accuracy_score(prediction_res, test_label)
 print('Accuracy: ', train_dataset_accuracy)
